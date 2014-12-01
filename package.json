@@ -2,7 +2,7 @@
   "name": "docpad-plugin-copy",
   "version": "2.0.0",
   "description": "Copies all files in the raw directory to out.",
-  "author": "Almero (http://almero.com)",
+  "author": "Almero Digital Marketing (http://almero.com)",
   "keywords": [
     "docpad",
     "docpad-plugin",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dimitarkolev/docpad-plugin-copy"
+    "url": "https://github.com/almero-digital-marketing/docpad-plugin-copy"
   },
   "engines": {
     "node": ">=0.4",
@@ -30,8 +30,8 @@
     "prepublish": "coffee -o out -c src"
   },
   "bugs": {
-    "url": "https://github.com/dimitarkolev/docpad-plugin-copy/issues"
+    "url": "https://github.com/almero-digital-marketing/docpad-plugin-copy/issues"
   },
-  "homepage": "https://github.com/dimitarkolev/docpad-plugin-copy",
+  "homepage": "https://github.com/almero-digital-marketing/docpad-plugin-copy",
   "license": "ISC"
 }
