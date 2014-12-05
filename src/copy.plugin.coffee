@@ -50,9 +50,9 @@ module.exports = (BasePlugin) ->
 
 					command = (
 						if XCOPY
-							['xcopy', '/eD', src+'\\*', out+'\\']
+							['xcopy', '/eDy', src+'\\*', out+'\\']
 						else
-							['cp', '-Ru', src+'/.', out ]
+							['cp', '-Ruf', src+'/.', out ]
 					)
 
 					safeps = require('safeps')
