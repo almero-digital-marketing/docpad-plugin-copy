@@ -1,6 +1,6 @@
 {
   "name": "docpad-plugin-copy",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Copies all files in the raw directory to out.",
   "author": "Almero Digital Marketing (http://almero.com)",
   "keywords": [

@@ -44,7 +44,7 @@ module.exports = (BasePlugin) ->
 
 					docpad.log("info", "Copying #{key} out: #{out}, src: #{src}")
 
-					WINDOWS = /win/.test(process.platform)
+					WINDOWS = /win32/.test(process.platform)
 					CYGWIN = /cygwin/.test(process.env.PATH)  # Cheap test!
 					XCOPY = WINDOWS && !CYGWIN
 
