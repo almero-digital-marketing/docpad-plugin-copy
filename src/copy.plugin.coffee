@@ -54,7 +54,7 @@ module.exports = (BasePlugin) ->
 							['xcopy', '/eDy', src+'\\*', out+'\\']
 						else
 							if OSX
-								['rsync', '-a', src, out ]
+								['rsync', '-a', src + '/', out + '/' ]
 							else
 								['cp', '-Ruf', src+'/.', out ]								
 					)

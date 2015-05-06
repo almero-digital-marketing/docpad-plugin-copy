@@ -1,0 +1,105 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'publish' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.38
+4 verbose node symlink /usr/bin/node
+5 verbose publish [ '.' ]
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /home/dick/.npm/3a52ce78-.lock
+11 verbose tar pack [ '/home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz', '.' ]
+12 verbose tarball /home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz
+13 verbose folder .
+14 info prepublish docpad-plugin-copy@2.1.2
+15 verbose unsafe-perm in lifecycle true
+16 silly lockFile 1f1177db-tar tar://.
+17 verbose lock tar://. /home/dick/.npm/1f1177db-tar.lock
+18 silly lockFile 1921eec1-ad-plugin-copy-2-1-2-package-tgz tar:///home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz
+19 verbose lock tar:///home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz /home/dick/.npm/1921eec1-ad-plugin-copy-2-1-2-package-tgz.lock
+20 silly lockFile 1f1177db-tar tar://.
+21 silly lockFile 1f1177db-tar tar://.
+22 silly lockFile 1921eec1-ad-plugin-copy-2-1-2-package-tgz tar:///home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz
+23 silly lockFile 1921eec1-ad-plugin-copy-2-1-2-package-tgz tar:///home/dick/.npm/docpad-plugin-copy/2.1.2/package.tgz
+24 silly lockFile 4ef29bee-docpad-plugin-copy-2-1-2-package /home/dick/.npm/docpad-plugin-copy/2.1.2/package
+25 verbose lock /home/dick/.npm/docpad-plugin-copy/2.1.2/package /home/dick/.npm/4ef29bee-docpad-plugin-copy-2-1-2-package.lock
+26 silly lockFile 4ef29bee-docpad-plugin-copy-2-1-2-package /home/dick/.npm/docpad-plugin-copy/2.1.2/package
+27 silly lockFile 4ef29bee-docpad-plugin-copy-2-1-2-package /home/dick/.npm/docpad-plugin-copy/2.1.2/package
+28 silly lockFile 3a52ce78- .
+29 silly lockFile 3a52ce78- .
+30 silly publish { name: 'docpad-plugin-copy',
+30 silly publish   version: '2.1.2',
+30 silly publish   description: 'Copies all files in the raw directory to out.',
+30 silly publish   author: { name: 'Almero Digital Marketing', url: 'http://almero.com' },
+30 silly publish   keywords: [ 'docpad', 'docpad-plugin', 'raw', 'copy' ],
+30 silly publish   repository:
+30 silly publish    { type: 'git',
+30 silly publish      url: 'https://github.com/almero-digital-marketing/docpad-plugin-copy' },
+30 silly publish   engines: { node: '>=0.4', docpad: '>=6.66 <7' },
+30 silly publish   dependencies: { eachr: '^2.0.2', safeps: '^2.2.12', taskgroup: '^4.0.5' },
+30 silly publish   devDependencies: { 'coffee-script': '~1.4.0' },
+30 silly publish   main: './out/copy.plugin.js',
+30 silly publish   scripts: { prepublish: 'coffee -o out -c src' },
+30 silly publish   bugs: { url: 'https://github.com/almero-digital-marketing/docpad-plugin-copy/issues' },
+30 silly publish   homepage: 'https://github.com/almero-digital-marketing/docpad-plugin-copy',
+30 silly publish   license: 'ISC',
+30 silly publish   readme: '# Copy Plugin for DocPad\n\nCopies all files in the raw directory to out. Useful for large files that cause out of memory error when placed in files directory.\n\n## Install\n\n```\nnpm install --save docpad-plugin-copy\n```\n\n## Usage\n\nIn most cases this plugin is drop in replacement of `raw` plugin. However there are some scenarios where you should use `raw` plugin.\n\n### Extra features and improvements\n\nThis plugin does not support custom commands as `raw` plugin does. This plugin does not use `ncp` neither. If you need any of those options please use `raw`.\n\nWhat this plugin is doing differently is just the way it copies the files from `raw` folder. While `raw` plugin copies each file on every generation and regeneration which might take a lot of time, this plugin copies only files that have been changed from previous regeneration and this can easily speed up the generation process from minutes to seconds.\n\nThis plugin is a must for almost any docpad site except very small ones that does not have many files. If you are used to `raw` plugin this one will speed docpad even more.\n\n### Basic Usage\n\nIf no configuration is specified it will copy `raw` folder in `out` so its pretty much the same as [Raw Plugin](https://github.com/docpad/docpad-plugin-raw)\n\n### Custom Configuration\n\nSet as many sources as you want. Path should be relative to the `src` directory. If you want you can specify destination folder with `out` option, it is relative to `out` directory.\n\n```\nplugins:\n    copy:\n        raw:\n            src: \'raw\'\n        app:\n            src: \'app\'\n        system:\n            src: \'sys\'\n            out: \'admin/cpanel\'\n```\n\n### Extra Optimization\n\nIf you want to speed up your DocPad generation and regeneration you should use `raw` folder for any file that does not change very often. This is because every change of a file in `src` foder triggers full regeneration except when the file is marked as standalone. And it much easier to make files in `static` folder treated as standalone. You can easily move files and folders from `static` to `raw` and vice versa without any changes to the layouts and documents.\n\nBest approach is to put your vendor scripts in `raw` folder as well as large data files, images and fonts, because they don\'t change often. Your script files should better stay in `static` folder. To mark your `static` files as standalone you have to add this configuration do `docpad.coffee`\n\n```\nevents:\n    extendCollections: (opts) ->\n        @docpad.getCollection(\'files\').on(\'add\', (document) ->\n            document.setMetaDefaults(standalone:true))    \n```\n\nIt\'s not bad idea to mark all your scripts and styles as standalone also. This is the configuration for the best performance combined with the usage of this plugin.\n\n```\nevents:\n    extendCollections: (opts) ->\n        @docpad.getCollection(\'files\').on(\'add\', (document) ->\n            document.setMetaDefaults(standalone:true))    \n        @docpad.getCollection(\'stylesheet\').on(\'add\', (document) ->\n            document.setMetaDefaults(standalone:true))           \n        @docpad.getCollection(\'scripts\').on(\'add\', (document) ->\n            document.setMetaDefaults(standalone:true))    \n```',
+30 silly publish   readmeFilename: 'README.md',
+30 silly publish   gitHead: '5bd618d3500a6ec53b955a04deb8e22328dd3ca0',
+30 silly publish   _id: 'docpad-plugin-copy@2.1.2',
+30 silly publish   _shasum: '55d6c689ac3ead550bb2a4345d1e0e181d0c43bc',
+30 silly publish   _from: '.' }
+31 verbose request where is /docpad-plugin-copy
+32 verbose request registry https://registry.npmjs.org/
+33 verbose request id 0ede8af2d73ef049
+34 verbose url raw /docpad-plugin-copy
+35 verbose url resolving [ 'https://registry.npmjs.org/', './docpad-plugin-copy' ]
+36 verbose url resolved https://registry.npmjs.org/docpad-plugin-copy
+37 verbose request where is https://registry.npmjs.org/docpad-plugin-copy
+38 info trying registry request attempt 1 at 09:40:42
+39 http PUT https://registry.npmjs.org/docpad-plugin-copy
+40 http 403 https://registry.npmjs.org/docpad-plugin-copy
+41 verbose headers { 'content-type': 'application/json',
+41 verbose headers   'cache-control': 'max-age=60',
+41 verbose headers   'content-length': '95',
+41 verbose headers   'accept-ranges': 'bytes',
+41 verbose headers   date: 'Wed, 06 May 2015 06:40:44 GMT',
+41 verbose headers   via: '1.1 varnish',
+41 verbose headers   connection: 'keep-alive',
+41 verbose headers   'x-served-by': 'cache-fra1221-FRA',
+41 verbose headers   'x-cache': 'MISS',
+41 verbose headers   'x-cache-hits': '0',
+41 verbose headers   'x-timer': 'S1430894442.997111,VS0,VE1449' }
+42 error publish Failed PUT 403
+43 error Error: "You cannot publish over the previously published version 2.1.2." : docpad-plugin-copy
+43 error     at RegClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+43 error     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+43 error     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:236:22)
+43 error     at Request.emit (events.js:98:17)
+43 error     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+43 error     at Request.emit (events.js:117:20)
+43 error     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+43 error     at IncomingMessage.emit (events.js:117:20)
+43 error     at _stream_readable.js:944:16
+43 error     at process._tickCallback (node.js:448:13)
+44 error If you need help, you may report this *entire* log,
+44 error including the npm and node versions, at:
+44 error     <http://github.com/npm/npm/issues>
+45 error System Linux 3.13.0-52-generic
+46 error command "/usr/bin/node" "/usr/bin/npm" "publish"
+47 error cwd /home/dick/Projects/lib/docpad-plugin-copy
+48 error node -v v0.10.38
+49 error npm -v 1.4.28
+50 verbose exit [ 1, true ]
