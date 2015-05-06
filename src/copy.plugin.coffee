@@ -45,6 +45,7 @@ module.exports = (BasePlugin) ->
 					docpad.log("info", "Copying #{key} out: #{out}, src: #{src}")
 
 					WINDOWS = /win32/.test(process.platform)
+					OSX = /darwin/.test(process.platform)
 					CYGWIN = /cygwin/.test(process.env.PATH)  # Cheap test!
 					XCOPY = WINDOWS && !CYGWIN
 
@@ -52,7 +53,10 @@ module.exports = (BasePlugin) ->
 						if XCOPY
 							['xcopy', '/eDy', src+'\\*', out+'\\']
 						else
-							['cp', '-Ruf', src+'/.', out ]
+							if OSX
+								['rsync', '-a', src, out ]
+							else
+								['cp', '-Ruf', src+'/.', out ]								
 					)
 
 					safeps = require('safeps')
